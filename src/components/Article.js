@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  article: PropTypes.shape.isRequired({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }),
+};
 
 const Article = ({ article }) => {
   return (
@@ -26,6 +35,12 @@ const Article = ({ article }) => {
       </Card.Body>
     </Card>
   );
+};
+
+Article.propTypes = propTypes;
+
+Article.defaultProps = {
+  article: {},
 };
 
 export default Article;

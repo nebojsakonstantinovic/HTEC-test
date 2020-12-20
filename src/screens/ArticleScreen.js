@@ -1,18 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Image } from 'react-bootstrap';
-import news from '../news';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Image, Button } from 'react-bootstrap';
+import { disableLanguageChange } from '../actions/languageActions';
 
-const ArticleScreen = ({ match }) => {
-  const article = news.find(art => art.id === match.params.id);
+const ArticleScreen = ({ match, history }) => {
+  const dispatch = useDispatch();
+  const news = useSelector(state => state.news);
+  const { articles } = news;
+
+  const article = articles.find(art => art.id === match.params.id);
+
+  useEffect(() => {
+    dispatch(disableLanguageChange(true));
+    return () => {
+      dispatch(disableLanguageChange(false));
+    };
+  }, [dispatch]);
 
   if (!article) {
     return (
       <>
         <div>Sorry this article does not exist</div>
-        <Link className="btn btn-light my-3" to="/">
+        <Button className="btn btn-light my-3" onClick={() => history.goBack()}>
           Go Back
-        </Link>
+        </Button>
       </>
     );
   }
@@ -32,9 +43,9 @@ const ArticleScreen = ({ match }) => {
         </Col>
         <Col sm={12}>{article.content || article.description}</Col>
       </Row>
-      <Link className="btn btn-light my-3" to="/">
+      <Button className="btn btn-light my-3" onClick={() => history.goBack()}>
         Go Back
-      </Link>
+      </Button>
     </>
   );
 };

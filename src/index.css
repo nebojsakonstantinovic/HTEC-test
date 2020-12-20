@@ -1,3 +1,9 @@
 main {
   min-height: 80vh;
 }
+
+@media screen and (min-width: 576px) {
+  .w-sm-auto {
+    width: auto !important;
+  }
+}

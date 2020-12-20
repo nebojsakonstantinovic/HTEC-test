@@ -17,9 +17,10 @@
         "react/prop-types": 0,
         "no-underscore-dangle": "off",
         "react/jsx-one-expression-per-line": "off",
-        "jsx-a11y/click-events-have-key-events": "off",
+        // "jsx-a11y/click-events-have-key-events": "off",
         "prettier/prettier": ["warn", {
            "endOfLine":"auto"
-         }]
+         }],
+         "import/prefer-default-export":"off"
     }
 }

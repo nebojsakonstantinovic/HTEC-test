@@ -1,15 +1,18 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { changeLanguage } from '../actions/languageActions';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const language = useSelector(state => state.language);
+  const { country, disabled } = language;
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-          {/* <LinkContainer to="/">
-            <Navbar.Brand>Htec</Navbar.Brand>
-          </LinkContainer> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -27,12 +30,23 @@ const Header = () => {
           </Navbar.Collapse>
           <Navbar.Collapse id="language-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to="/en">
-                <Nav.Link>EN</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/us">
-                <Nav.Link>US</Nav.Link>
-              </LinkContainer>
+              <Nav.Link
+                className={`${country === 'gb' && 'active'} ${
+                  disabled && 'disabled'
+                }`}
+                onClick={() => dispatch(changeLanguage('gb'))}
+              >
+                EN
+              </Nav.Link>
+
+              <Nav.Link
+                className={`${country === 'us' && 'active'} ${
+                  disabled && 'disabled'
+                }`}
+                onClick={() => dispatch(changeLanguage('us'))}
+              >
+                US
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

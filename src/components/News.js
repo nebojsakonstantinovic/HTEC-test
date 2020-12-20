@@ -1,8 +1,18 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Article from './Article';
+import Loader from './Loader';
+import Message from './Message';
 
-const News = ({ news }) => {
+const News = ({ news, loading, error }) => {
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Message variant="danger">{error}</Message>;
+  }
+
   return (
     <Row>
       {news.map(article => (

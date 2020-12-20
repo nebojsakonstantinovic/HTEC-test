@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import ArticleListItem from '../components/ArticleListItem';
+import { getCategory } from '../actions/categoriesListActions';
+import categoriesArr from '../constants/categories';
 
 const CategoriesScreen = () => {
-  const categoriesArr = [
-    'business',
-    'entertainment',
-    'general',
-    'health',
-    'science',
-    'sports',
-    'technology',
-  ];
+  const dispatch = useDispatch();
+
+  const { categoryObj, language } = useSelector(state => ({
+    categoryObj: state.category,
+    language: state.language,
+  }));
+  const { country } = language;
+
+  useEffect(() => {
+    categoriesArr.forEach(category => dispatch(getCategory(category)));
+    return () => {};
+  }, [dispatch, country]);
 
   const [state, setState] = useState({
     business: true,
@@ -52,7 +59,7 @@ const CategoriesScreen = () => {
   return (
     <>
       <div>
-        <h1>Top 5 news by categories</h1>
+        <h1>Top 5 news by categories from {country.toUpperCase()}</h1>
       </div>
       {categoriesArr.map(category => (
         <div key={category} className="py-3">
@@ -60,22 +67,19 @@ const CategoriesScreen = () => {
             <Link to={`Categories/${category}`} className="pr-2">
               {category}
             </Link>
-            <span
+            <Button
               className="btn btn-light px-2"
               onClick={closeOpenHandler(category)}
-              onKeyDown={() => {}}
-              role="button"
-              tabIndex={0}
             >
               {state[category] ? 'close' : 'open'}
-            </span>
+            </Button>
           </p>
-
           {state[category] && (
             <ArticleListItem
               categoryIndex={stateIndex[category]}
               changeSlide={changeSlide}
               category={category}
+              categoryObj={categoryObj}
             />
           )}
         </div>
