@@ -1,7 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { disableLanguageChange } from '../actions/languageActions';
+
+const propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 const ArticleScreen = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -21,9 +34,9 @@ const ArticleScreen = ({ match, history }) => {
     return (
       <>
         <div>Sorry this article does not exist</div>
-        <Button className="btn btn-light my-3" onClick={() => history.goBack()}>
-          Go Back
-        </Button>
+        <Link className="btn btn-light my-3" to="/">
+          Go back to Home
+        </Link>
       </>
     );
   }
@@ -49,5 +62,7 @@ const ArticleScreen = ({ match, history }) => {
     </>
   );
 };
+
+ArticleScreen.propTypes = propTypes;
 
 export default ArticleScreen;

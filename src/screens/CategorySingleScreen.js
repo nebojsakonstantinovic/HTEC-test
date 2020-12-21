@@ -1,10 +1,22 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import News from '../components/News';
 import { getNews } from '../actions/newsActions';
 import categoriesArr from '../constants/categories';
 import countryList from '../constants/countryList';
+
+const propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      category: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 const CategorySingleScreen = ({ match, history }) => {
   const { category } = match.params;
@@ -46,5 +58,6 @@ const CategorySingleScreen = ({ match, history }) => {
     </>
   );
 };
+CategorySingleScreen.propTypes = propTypes;
 
 export default CategorySingleScreen;

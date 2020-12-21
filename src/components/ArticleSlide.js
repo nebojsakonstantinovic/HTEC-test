@@ -1,5 +1,16 @@
 import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  article: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    urlToImage: PropTypes.string,
+    description: PropTypes.string,
+    content: PropTypes.string,
+  }),
+};
 
 const ArticleSlide = ({ article }) => {
   return (
@@ -15,6 +26,12 @@ const ArticleSlide = ({ article }) => {
       </Row>
     </Card>
   );
+};
+
+ArticleSlide.propTypes = propTypes;
+
+ArticleSlide.defaultProps = {
+  article: {},
 };
 
 export default ArticleSlide;

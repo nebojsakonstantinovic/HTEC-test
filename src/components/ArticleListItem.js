@@ -1,8 +1,20 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Loader from './Loader';
 import Message from './Message';
 import ArticleSlide from './ArticleSlide';
+
+const propTypes = {
+  categoryIndex: PropTypes.number.isRequired,
+  changeSlide: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
+  categoryObj: PropTypes.shape({
+    articles: PropTypes.arrayOf(PropTypes.object),
+    loading: PropTypes.bool,
+    error: PropTypes.string,
+  }).isRequired,
+};
 
 const ArticleListItem = ({
   categoryIndex,
@@ -49,8 +61,6 @@ const ArticleListItem = ({
   );
 };
 
-ArticleListItem.defaultProps = {
-  categoryObj: {},
-};
+ArticleListItem.propTypes = propTypes;
 
 export default ArticleListItem;

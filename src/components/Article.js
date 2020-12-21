@@ -4,9 +4,10 @@ import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  article: PropTypes.shape.isRequired({
+  article: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
+    urlToImage: PropTypes.string,
     description: PropTypes.string,
   }),
 };

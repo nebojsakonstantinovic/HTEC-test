@@ -64,7 +64,10 @@ const CategoriesScreen = () => {
       {categoriesArr.map(category => (
         <div key={category} className="py-3">
           <p>
-            <Link to={`Categories/${category}`} className="pr-2">
+            <Link
+              to={`Categories/${category}`}
+              className="pr-2 font-weight-bold text-uppercase"
+            >
               {category}
             </Link>
             <Button
