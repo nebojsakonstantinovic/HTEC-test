@@ -2,10 +2,10 @@
 
 ## How to run the project
 
-To run this project you will need Node.js
-Clone the repository with git
-Open repository in terminal and run npm i to install node_modules
-In terminal run command npm start
+To run this project you will need Node.js. \
+Clone the repository with git. \
+Open repository in terminal and run npm i to install node_modules. \
+In terminal run command npm start. \
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Getting Started with Create React App
